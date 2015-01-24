@@ -1,6 +1,7 @@
-angular.module('contatooh').controller('ContatosController',
-  function($scope) {
+angular.module('contatooh').controller( 'ContatosController' ,
+  function($scope, $http) {
   	$scope.total = 0;
+  	$scope.filtro = "";
   	$scope.incrementa = function(){
   		$scope.total ++;
   	};
@@ -21,4 +22,5 @@ angular.module('contatooh').controller('ContatosController',
 			"email": "email3@email.com"
 		}
 	];
-});
+  }
+);
