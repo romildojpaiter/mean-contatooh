@@ -12,6 +12,11 @@ module.exports = function() {
 	controller.listaContatos = function(request, response) {
 		response.json(contatos);
 	}
+	
+	controller.removeContato = function(req, res) {
+		console.log('API: removeContato: ');
+	};	
+
 	controller.obtemContato = function(request, response){
 		// console.log(request.params.id);
 		var idContato = request.params.id;
