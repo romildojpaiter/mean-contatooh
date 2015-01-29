@@ -3,7 +3,25 @@ angular.module('contatooh').controller('ContatoController',
 
 		console.log($routeParams.contatoId);
 
-		var Contato = $resource('/contato');
+		$scope.mensagem = {texto: ''};
+
+		var Contato = $resource('/contatos/:id');
+
+		if ($routeParams.contatoId) {
+			Contato.get({id: $routeParams.contatoId},
+				function(contato){
+					$scope.contato = contato;
+					// console.log(contato);
+				},
+				function(error){
+					$scope.mensagem = {
+						texto: "Não foi possível obter o contato solicitado."
+					}
+				}
+			);
+		} else {
+			$scope.contato = {};
+		}
 		
 	}
 );

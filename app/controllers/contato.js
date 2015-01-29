@@ -16,11 +16,13 @@ module.exports = function() {
 	}
 
 	controller.obtemContato = function(req, res){
-		// console.log(request.params.id);
+		// console.log(req.params.id);
 		var idContato = req.params.id;
-		var contato = contatos.filter( function(contato) {
-			return contato._id == idContato;
-		})[0];
+		var contato = contatos.filter( 
+			function(contato) {
+				//console.log('controller.obtemContato aqui');
+				return contato._id == idContato;
+			})[0];
 		contato ? 
 			res.json(contato) :
 			res.status(404).send('Contato não encontrado');
