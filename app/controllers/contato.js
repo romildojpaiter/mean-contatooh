@@ -10,6 +10,8 @@ var contatos = [
 module.exports = function() {
 
 	var controller = {};
+    
+    var ID_CONTATO_INC = 3;
 
 	controller.listarContatos = function(req, res) {
 		res.json(contatos);
@@ -38,7 +40,30 @@ module.exports = function() {
 
 	controller.salvarContato = function(request, response) {
 		console.log('API: Salvando Contatos: ');
-	}	
+
+        var contato = request.body;
+        contato = contato._id ?
+                    atualiza(contato) :
+                    adiciona(contato);
+        response.json(contato);
+        
+	}
+    
+    function adiciona(contatoNovo){
+        contatoNovo._id = ++ID_CONTATO_INC;
+        contatos.push(contatoNovo);
+        return contatoNovo;
+    }
+    
+    function atualiza(contatoAlterar){
+        contatos = contatos.map(function(contato) {
+            if(contato._id == contatoAlterar._id) {
+                contato = contatoAlterar;
+            }
+            return contato;
+        });
+        return contatoAlterar;                        
+    }
 
 	return controller;
 
