@@ -24,4 +24,15 @@ module.exports = function() {
             }
         );
     }));
-}
+    
+    passport.serializeUser(function(usuario, done){
+        done(null, usuario._id);
+    });
+    
+    passport.deserializeUser(function(id, done) {
+        Usuario.findById(id).exec()
+        .then(function(usuario) {
+            done(null, usuario);
+        });
+    });
+};
