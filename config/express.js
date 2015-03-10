@@ -25,7 +25,7 @@ module.exports = function() {
         {
             secret: 'homem avestuz',
             resave: true,
-            saveUnitialized: true
+            saveUninitialized: true
         }
     ));
     app.use(passport.initialize());
@@ -34,6 +34,7 @@ module.exports = function() {
 	// Carregamento das rotas
 	load('models', {cwd: 'app'})
 		.then('controllers')
+        .then('routes/auth.js')
 		.then('routes')
 		.into(app);
 	

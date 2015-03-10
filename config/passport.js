@@ -18,9 +18,9 @@ module.exports = function() {
             function(erro, usuario) {
                 if (erro) {
                     console.log(erro);
-                    retun done(erro);
+                    return done(erro);
                 }
-                retun done(null, usuario);
+                return done(null, usuario);
             }
         );
     }));
