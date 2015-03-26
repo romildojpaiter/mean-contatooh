@@ -1,13 +1,30 @@
 module.exports = function(app) {
+    
+    function verificaAutenticacao(req, res, next){
+        if(req.isAuthenticated()){
+            return next();
+        } else {
+            res.status('401').json('Não autoriazado');
+        }
+    }    
 	
 	var controller = app.controllers.contato;
 
-	app.route('/contatos')
+    
+	/*app.route('/contatos')
 		.get(controller.listarContatos)
 		.post(controller.salvarContato);
 
 	app.route('/contatos/:id')
 		.get(controller.obtemContato)
-		.delete(controller.removeContato);
-    
+		.delete(controller.removeContato);*/
+
+	app.route('/contatos')
+		.get(verificaAutenticacao, controller.listarContatos)
+		.post(verificaAutenticacao, controller.salvarContato);
+
+	app.route('/contatos/:id')
+		.get(verificaAutenticacao, controller.obtemContato)
+		.delete(verificaAutenticacao, controller.removeContato);
+
 }
