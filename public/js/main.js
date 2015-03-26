@@ -1,22 +1,26 @@
-angular.module('contatooh', ['ngRoute', 'ngResource']).config(
-	function($routeProvider) {
+angular.module('contatooh', ['ngRoute', 'ngResource'])
+    .config( function($routeProvider, $httpProvider) {
+        
+        // Interceptors
+        $httpProvider.interceptors.push('meuInterceptor');
    		
+        // Rotas
         $routeProvider.when('/contatos', {
       		templateUrl: 'partials/contatos.html',
       		controller: 'ContatosController' 
       	});
 
-      	$routeProvider.when('/contato/:contatoId',{
+      	$routeProvider.when('/contato/:contatoId', {
       		templateUrl: 'partials/contato.html',
       		controller: 'ContatoController'
       	});
         
-      	$routeProvider.when('/contato',{
+      	$routeProvider.when('/contato', {
       		templateUrl: 'partials/contato.html',
       		controller: 'ContatoController'
       	});
         
-        $routeProvider.when('/auth',{
+        $routeProvider.when('/auth', {
             templateUrl: 'partials/auth.html'
         });
          
