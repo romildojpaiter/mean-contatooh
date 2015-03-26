@@ -14,9 +14,11 @@ module.exports = function() {
     }, 
     function(accessToken, refreshToken, profile, done) {
         
+        // console.log('+ Profile: ' + JSON.stringify(profile));
+        
         Usuario.findOrCreate(
             {"login" : profile.username},
-            {"nome" : profile.username},
+            {"nome" : profile.displayName},
             function(erro, usuario) {
                 if (erro) {
                     console.log(erro);

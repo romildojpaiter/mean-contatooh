@@ -10,14 +10,9 @@ module.exports = function(app) {
             )
     );
     
-    /*app.get('/', function(req, res, next) {
-        if(req.isAuthenticated()) {
-            // permite que as rotas sejam processadas
-            return next();
-        } else {
-            // renderiza auth.ejs
-            res.render("auth");
-        }
-    });*/
+    app.get('/logout', function(req, res) {
+        req.logOut();
+        res.redirect('/');
+    });
     
 }
