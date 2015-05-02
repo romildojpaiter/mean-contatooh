@@ -1,3 +1,5 @@
+var sanitize = require('mongo-sanitize');
+
 module.exports = function(app) {
 
 	var controller = {};
@@ -33,11 +35,11 @@ module.exports = function(app) {
 	};
 
 	controller.removeContato = function(req, res) {
-        var _id = req.params.id;
+        var _id = sanitize(req.params.id);
         Contato.remove({_id: _id}).exec()
         .then(
             function(){
-                res.end();
+                res.status(204).end();
             },
             function(erro){
                 return console.error(erro);
@@ -50,6 +52,12 @@ module.exports = function(app) {
         
         // Testando emergencia undefined
         req.body.emergencia = req.body.emergencia || null;
+        
+        var dados = {
+            "nome" : req.body.nome,
+            "email" : req.body.email,
+            "emergencia" : req.body.emergencia || null
+        }
         
         if(_id){
             Contato.findByIdAndUpdate(_id, req.body).exec()
