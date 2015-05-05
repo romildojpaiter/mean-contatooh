@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         ngAnnotate : {
             scripts: {
                 expand: true,
-                scr: ['dist/public/js/**/*.js']
+                src: ['dist/public/js/**/*.js']
             }
         },        
         useminPrepare : {
